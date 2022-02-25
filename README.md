@@ -1,1 +1,1 @@
-# standar ML for practice
+# standard ML for practice
