@@ -1,1 +1,1 @@
-# Standard ML for practice
+# Standard ML for practicing functional programming
