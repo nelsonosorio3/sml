@@ -9,7 +9,7 @@ exception MyOtherException of int * int;
 
 fun mydiv (x, y) =
     if y = 0
-    then rais MyUndesirableCondition
+    then raise MyUndesirableCondition
     else x div y;
 
 fun maxlist (xs, ex) = (* int list * exn -> int *)
