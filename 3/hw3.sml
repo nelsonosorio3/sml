@@ -39,30 +39,18 @@ datatype typ = Anything
 fun only_capitals list =
     List.filter (fn word => Char.isUpper (String.sub (word, 0))) list;
 
-(*
-fun longest_string1 list =
-    List.foldl (fn (word, longest) => if String.size word > String.size longest then word else longest) "" list;
-
-fun longest_string2 list =
-    List.foldl (fn (word, longest) => if String.size word >= String.size longest then word else longest) "" list;
-
-fun longest_string_helper f list =
-    List.foldl f "" list;
-
-*)
-
 val longest_string1 =
     List.foldl (fn (word, longest) => if String.size word > String.size longest then word else longest) "";
 
 val longest_string2 =
     List.foldl (fn (word, longest) => if String.size word >= String.size longest then word else longest) "";
 
-val longest_string_helper = fn g =>
-    List.foldl g "";
+fun longest_string_helper f =
+    List.foldl (fn (word, longest) => if f(String.size word, String.size longest) then word else longest) "";
 
-val longest_string3 = longest_string_helper (fn (x, y) => if String.size x > String.size y then x else y);
+val longest_string3 = longest_string_helper (fn (x, y) => x > y);
 
-val longest_string4 = longest_string_helper (fn (x, y) => if String.size x >= String.size y then x else y);
+val longest_string4 = longest_string_helper (fn (x, y) => x >= y);
 
 val longest_capitalized = longest_string1 o only_capitals;
     
@@ -84,7 +72,7 @@ fun all_answers f list =
 	    [] => SOME acc
 	  | head :: tail => case f (head) of
 				NONE => NONE
-			      | SOME v => helper(tail, [v] @ acc)
+			      | SOME v => helper(tail, v @ acc)
     in
 	helper (list, [])
     end;
